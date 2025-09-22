@@ -4,6 +4,7 @@ const express = require('express');
 const BodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
+const serverless = require("serverless-http");
 
 const app = express();
 app.use(BodyParser.json());
@@ -43,9 +44,10 @@ app.get('/',(req,resp)=>{
     resp.send('Hello server');
 })
 
-app.listen(port,()=>{
-    console.log(`Server is running on : http://localhost:${port}`);
+// app.listen(port,()=>{
+//     console.log(`Server is running on : http://localhost:${port}`);
     
-});
+// });
 
 module.exports = app; // IMPORTANT for Vercel
+module.exports.handler = serverless(app);
